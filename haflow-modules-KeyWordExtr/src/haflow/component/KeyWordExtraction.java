@@ -82,7 +82,7 @@ public class KeyWordExtraction {
             is.readFully(0, buffer);
             //System.out.println(buffer);
             is.close();
-            fs.close();
+            //fs.close();
             
             return buffer;
         }
@@ -102,7 +102,7 @@ public class KeyWordExtraction {
 	        
 	        os.close();
 	        
-	        hdfs.close();
+	        //hdfs.close();
 	    }
 	
 	public static void main(String[] args){
