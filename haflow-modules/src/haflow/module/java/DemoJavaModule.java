@@ -10,7 +10,7 @@ import haflow.module.ModuleType;
 
 import java.util.Map;
 
-@Module(id = "ada600a8-aa63-968a-ca46-9085a0e0bd2f", name = "DemoJava", category = "Test", 
+@Module(id = "ada600a8-aa63-968a-ca46-9085a0e0bd2f", name = "DemoJava", category = "Basic", 
 		type = ModuleType.JAVA, configurations = { 
 			@ModuleConfiguration(key = "arg_test", displayName = "Arguments Test", pattern = "^(.*)$", type = ModuleConfigurationType.PLAIN_TEXT), }, 
 		inputs = { @ModuleEndpoint(name = "from", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText) }, 
