@@ -25,6 +25,7 @@ import org.apache.hadoop.fs.Path;
 public class KeyWordExtraction {
 	private Map<String,Integer> dictionary;
 	private int wordCount;
+	private Dictionary stopDict;
 	
 	public KeyWordExtraction(){
 		this.dictionary=new HashMap<String,Integer>();
@@ -32,7 +33,9 @@ public class KeyWordExtraction {
 	}
 	
 	public void insert(String key){
+		stopDict=Dictionary.getInstance();
 		wordCount++;
+		if(stopDict.isStopWord(key)||key.length()<2){return;}
 		if(dictionary.containsKey(key)){
 			int num=dictionary.get(key);
 			dictionary.put(key, num+1);
@@ -57,10 +60,11 @@ public class KeyWordExtraction {
 	}
 	public List<Map.Entry<String, Integer>> sort(){
 		List<Map.Entry<String, Integer>> dicList = new ArrayList<Map.Entry<String, Integer>>(this.dictionary.entrySet()); 
-		Collections.sort(dicList, new Comparator<Map.Entry<String, Integer>>() {  
+		Collections.sort(dicList, new Comparator<Map.Entry<String, Integer>>() {
+			
 			public int compare(Entry<String, Integer> o1,
 					Entry<String, Integer> o2) {
-				return (o2.getValue()).toString().compareTo(o1.getValue().toString());	
+				return (o2.getValue()-o1.getValue());	
 			}
 		 });
 		return dicList;
@@ -82,7 +86,7 @@ public class KeyWordExtraction {
             is.readFully(0, buffer);
             //System.out.println(buffer);
             is.close();
-            fs.close();
+            //fs.close();
             
             return buffer;
         }
@@ -102,7 +106,7 @@ public class KeyWordExtraction {
 	        
 	        os.close();
 	        
-	        hdfs.close();
+	        //hdfs.close();
 	    }
 	
 	public static void main(String[] args){
@@ -147,7 +151,7 @@ public class KeyWordExtraction {
 			Pattern expression=Pattern.compile("[a-zA-Z]+");
 			
 			while((line=br.readLine())!=null){
-				line.toLowerCase();
+				line=line.toLowerCase();
 				//System.out.println(line);
 				Matcher m=expression.matcher(line);
 				while(m.find()){
