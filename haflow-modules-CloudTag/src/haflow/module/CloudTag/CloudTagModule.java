@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Module(id = "add600a8-ab63-8901-ca46-aaffa0d0cd5f", name = "CloudTag", category = "Basic", type = ModuleType.JAVA, configurations = {
+@Module(id = "add600a8-ab63-8901-ca46-aaffa0d0cd5f", name = "CloudTag", category = "TextMining", type = ModuleType.JAVA, configurations = {
 		@ModuleConfiguration(key = "output_file", displayName = "Output File", pattern = "^(.*)$", type = ModuleConfigurationType.PLAIN_TEXT),
 		@ModuleConfiguration(key = "input_file", displayName = "Input File", pattern = "^(.*)$", type = ModuleConfigurationType.PLAIN_TEXT) }, inputs = { @ModuleEndpoint(name = "from", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText) }, outputs = {
 		@ModuleEndpoint(name = "ok", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText),
