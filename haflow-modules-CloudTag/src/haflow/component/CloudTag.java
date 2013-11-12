@@ -55,7 +55,7 @@ public class CloudTag {
 			is.readFully(0, buffer);
 			
 			is.close();
-			fs.close();
+			//fs.close();
 
 			return buffer;
 		} else {
@@ -73,7 +73,7 @@ public class CloudTag {
 
 		hdfs.copyFromLocalFile(src, dst);
 
-		hdfs.close();
+		//hdfs.close();
 	}
 
 	public static void main(String[] args){
