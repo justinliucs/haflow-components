@@ -10,9 +10,11 @@ import haflow.module.ModuleType;
 
 import java.util.Map;
 
-@Module(id = "add600a8-aa63-8901-ca46-aaffa0e0bd2f", name = "Hive", category = "DataSource", type = ModuleType.HIVE, configurations = {
+@Module(id = "add600a8-aa63-8901-ca46-aaffa0e0bd2f", name = "Hive", category = "DataSource", type = ModuleType.HIVE, 
+	configurations = {
 		@ModuleConfiguration(key = "sql", displayName = "Sql Command", pattern = "^(.*)$", type = ModuleConfigurationType.PLAIN_TEXT),}, 
-		inputs = { @ModuleEndpoint(name = "from", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText) }, outputs = {
+	inputs = { }, 
+	outputs = {
 		@ModuleEndpoint(name = "ok", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText),
 		@ModuleEndpoint(name = "error", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText) })
 public class HiveModule extends AbstractHiveModule {

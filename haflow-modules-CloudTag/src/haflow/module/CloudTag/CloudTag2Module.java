@@ -10,11 +10,11 @@ import haflow.module.ModuleType;
 
 import java.util.Map;
 
-@Module(id = "add600a8-ab63-8901-ca46-aaffa0d0cd5f", name = "CloudTag", category = "TextMining", type = ModuleType.JAVA, 
+@Module(id = "add600a8-ab63-8901-ca46-bbffa0d0cd11", name = "CloudTag2", category = "TextMining", type = ModuleType.JAVA, 
 	configurations = {}, 
 	inputs = { @ModuleEndpoint(name = "input_file", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText) }, 
 	outputs = { @ModuleEndpoint(name = "output_file", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText) })
-public class CloudTagModule extends AbstractJavaModule {
+public class CloudTag2Module extends AbstractJavaModule {
 
 	@Override
 	public boolean validate(Map<String, String> configurations,
