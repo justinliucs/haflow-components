@@ -25,7 +25,6 @@ public class CloudTagModule extends AbstractJavaModule {
 
 	@Override
 	public String getMainClass() {
-//		return  CloudTag.class.getName();
 		return CloudTag.class.getName();
 	}
 
