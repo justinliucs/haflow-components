@@ -16,19 +16,22 @@ import haflow.module.ModuleType;
 
 @Module(id = "aee612a8-ab34-8901-ca46-aaf120d0cd5f", name = "RunLogistic", category = "DataMining-Mahout", type = ModuleType.JAVA,
 configurations = {
-		@ModuleConfiguration(key = "model", displayName = "Model File: where to get training model", pattern = "^(.*)$", type = ModuleConfigurationType.PLAIN_TEXT),
+		/*@ModuleConfiguration(key = "model", displayName = "Model File: where to get training model", pattern = "^(.*)$", type = ModuleConfigurationType.PLAIN_TEXT),
 		@ModuleConfiguration(key = "input", displayName = "Input File: where to get training data", pattern = "^(.*)$", type = ModuleConfigurationType.PLAIN_TEXT),
-		@ModuleConfiguration(key = "output", displayName = "Output File: where to store the final results", pattern = "^(.*)$", type = ModuleConfigurationType.PLAIN_TEXT), 
+		@ModuleConfiguration(key = "output", displayName = "Output File: where to store the final results", pattern = "^(.*)$", type = ModuleConfigurationType.PLAIN_TEXT), */
 	
 		@ModuleConfiguration(key="auc",displayName = "auc: print AUC", pattern = "^(.*)$", type = ModuleConfigurationType.BOOLEAN),
 		@ModuleConfiguration(key="scores",displayName = "scores: print scores", pattern = "^(.*)$", type = ModuleConfigurationType.BOOLEAN),
 		@ModuleConfiguration(key="confusion",displayName = "confusion: print confusion matrix", pattern = "^(.*)$", type = ModuleConfigurationType.BOOLEAN),
 },
-		inputs = { @ModuleEndpoint(name = "from", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText) }, 
+inputs={@ModuleEndpoint(name = "input", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText),
+		@ModuleEndpoint(name = "model", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText)},
+outputs = { @ModuleEndpoint (name = "output", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText)}		
+/*inputs = { @ModuleEndpoint(name = "from", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText) }, 
 		outputs = {
 		@ModuleEndpoint(name = "ok", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText),
 		@ModuleEndpoint(name = "error", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText) 
-		})
+		}*/)
 public class RunLogisticModule extends AbstractJavaModule {
 	@Override
 	public boolean validate(Map<String, String> configurations,
@@ -42,7 +45,7 @@ public class RunLogisticModule extends AbstractJavaModule {
 		return  RunLogistic.class.getName();
 	}
 	
-	@Override
+	/*@Override
 	public List<String> getArguments(Map<String, String> configurations) {
 		Module module= this.getClass().getAnnotation(Module.class);
 		ModuleConfiguration[] confs = module.configurations();
@@ -81,7 +84,7 @@ public class RunLogisticModule extends AbstractJavaModule {
 				return conf.type();
 		}
 		return ModuleConfigurationType.OTHER;
-	}
+	}*/
 	
 	public static void main(String[] args) {
 		System.out.println("Demo Java Main");
