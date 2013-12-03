@@ -36,7 +36,6 @@ import org.apache.mahout.classifier.sgd.OnlineLogisticRegression;
 
 
 import java.io.BufferedReader;
-import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.Locale;
@@ -46,6 +45,7 @@ public final class RunLogistic {
   private static String inputFile;
   private static String modelFile;
   private static String outputFile;
+  private static String accurateFile;
   private static boolean showAuc;
   private static boolean showScores;
   private static boolean showConfusion;
@@ -68,6 +68,7 @@ public final class RunLogistic {
       //PrintWriter output=new PrintWriter(new FileOutputStream(outputFile),true);
       
       PrintWriter output=new PrintWriter(HdfsUtil.writeHdfs(outputFile),true);
+      PrintWriter acc_output=new PrintWriter(HdfsUtil.writeHdfs(accurateFile),true);
       Auc collector = new Auc();
       LogisticModelParameters lmp = LogisticModelParameters.loadFrom(HdfsUtil.open(modelFile));
 
@@ -93,17 +94,18 @@ public final class RunLogistic {
       }
 
       if (showAuc) {
-        output.printf(Locale.ENGLISH, "AUC , %.2f%n", collector.auc());
+        acc_output.printf(Locale.ENGLISH, "AUC , %.2f%n", collector.auc());
       }
       if (showConfusion) {
         Matrix m = collector.confusion();
-        output.printf(Locale.ENGLISH, "confusion, [[%.1f  %.1f], [%.1f  %.1f]]%n",
+        acc_output.printf(Locale.ENGLISH, "confusion, [[%.1f  %.1f], [%.1f  %.1f]]%n",
           m.get(0, 0), m.get(1, 0), m.get(0, 1), m.get(1, 1));
         m = collector.entropy();
-        output.printf(Locale.ENGLISH, "entropy, [[%.1f  %.1f], [%.1f  %.1f]]%n",
+        acc_output.printf(Locale.ENGLISH, "entropy, [[%.1f  %.1f], [%.1f  %.1f]]%n",
           m.get(0, 0), m.get(1, 0), m.get(0, 1), m.get(1, 1));
       }
       output.close();
+      acc_output.close();
     }
   }
 
@@ -136,6 +138,11 @@ public final class RunLogistic {
             .withArgument(argumentBuilder.withName("output").withMaximum(1).create())
             .withDescription("where to store predicting data")
             .create();
+    Option accurateFileOption = builder.withLongName("accurate")
+            .withRequired(true)
+            .withArgument(argumentBuilder.withName("accurate").withMaximum(1).create())
+            .withDescription("where to store accurate information")
+            .create();
     Group normalArgs = new GroupBuilder()
             .withOption(help)
             .withOption(quiet)
@@ -145,6 +152,7 @@ public final class RunLogistic {
             .withOption(inputFileOption)
             .withOption(modelFileOption)
             .withOption(outputFileOption)
+            .withOption(accurateFileOption)
             .create();
 
     Parser parser = new Parser();
@@ -161,6 +169,7 @@ public final class RunLogistic {
     inputFile = getStringArgument(cmdLine, inputFileOption);
     modelFile = getStringArgument(cmdLine, modelFileOption);
     outputFile=getStringArgument(cmdLine,outputFileOption);
+    accurateFile=getStringArgument(cmdLine,accurateFileOption);
     showAuc = getBooleanArgument(cmdLine, auc);
     showScores = getBooleanArgument(cmdLine, scores);
     showConfusion = getBooleanArgument(cmdLine, confusion);

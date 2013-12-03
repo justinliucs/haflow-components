@@ -1,7 +1,5 @@
 package haflow.modules.mahout.logistic;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 
@@ -26,7 +24,8 @@ configurations = {
 },
 inputs={@ModuleEndpoint(name = "input", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText),
 		@ModuleEndpoint(name = "model", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText)},
-outputs = { @ModuleEndpoint (name = "output", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText)}		
+outputs = { @ModuleEndpoint (name = "output", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText),
+			@ModuleEndpoint(name="accurate",minNumber=1,maxNumber=1,dataType=DataType.PlainText)}	
 /*inputs = { @ModuleEndpoint(name = "from", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText) }, 
 		outputs = {
 		@ModuleEndpoint(name = "ok", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText),
