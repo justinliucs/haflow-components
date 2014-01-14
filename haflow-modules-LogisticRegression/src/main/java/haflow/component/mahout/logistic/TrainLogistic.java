@@ -91,6 +91,7 @@ public final class TrainLogistic {
           csv.firstLine(in.readLine());
 
           String line = in.readLine();
+          
           while (line != null) {
             // for each new line, get target and predictors
             Vector input = new RandomAccessSparseVector(lmp.getNumFeatures());
