@@ -16,7 +16,8 @@ public class HiveJdbcClientTest {
 			System.exit(1);
 		}
 		Connection con = DriverManager.getConnection(
-				"jdbc:hive://m150:10000/default", "", "");
+				"jdbc:hive://133.133.2.150:10000/default", "root", "1234");
+		System.out.println("hehe");
 		Statement stmt = con.createStatement();
 		String tableName = "testHiveDriverTable";
 		stmt.executeQuery("drop table " + tableName);

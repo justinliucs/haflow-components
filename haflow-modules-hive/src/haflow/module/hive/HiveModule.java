@@ -14,9 +14,9 @@ import java.util.Map;
 	configurations = {
 		@ModuleConfiguration(key = "sql", displayName = "Sql Command", pattern = "^(.*)$", type = ModuleConfigurationType.PLAIN_TEXT),}, 
 	inputs = { }, 
-	outputs = {
-		@ModuleEndpoint(name = "ok", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText),
-		@ModuleEndpoint(name = "error", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText) })
+	outputs = {}
+		/*@ModuleEndpoint(name = "ok", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText),
+		@ModuleEndpoint(name = "error", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText) }*/)
 public class HiveModule extends AbstractHiveModule {
 	@Override
 	public boolean validate(Map<String, String> configurations,
