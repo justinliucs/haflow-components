@@ -16,18 +16,41 @@ public class HiveJdbcClientTest {
 			System.exit(1);
 		}
 		Connection con = DriverManager.getConnection(
-				"jdbc:hive://133.133.2.150:10000/default", "root", "1234");
+				"jdbc:hive://133.133.2.150:10000/default", "", "");
 		System.out.println("hehe");
 		Statement stmt = con.createStatement();
-		String tableName = "testHiveDriverTable";
+		ResultSet res=stmt.executeQuery("show tables");
+		while(res.next()){
+			System.out.println(res.getString(1));
+		}
+		String sql1="select v.rname, v.commoney " +
+		"from (select round(sum(a1.commoney)/10000,2) commoney, 1 areacode, 'live in hospital' rname "+
+            "from fact_mv_hosp_areacode a1 "+
+            "where a1.comdate>'2013-01-01' "+
+            "and  a1.comdate<'2013-12-02' "+
+            "and (a1.areacode like '%') "+
+
+    "union all  "+
+            "select round(sum(a2.commoney)/10000,2) commoney, 1 areacode, 'out patient' rname "+
+            "from fact_mv_cli_areacode a2 "+
+            "where a2.comdate>'2013-01-01' "+
+            "and a2.comdate<'2013-12-02' "+
+            "and (a2.areacode like '%') "+
+    ")v";
+		
+		res=stmt.executeQuery(sql1);
+		while(res.next()){
+			System.out.println(res.getString(1)+"\t"+res.getString(2));
+		}
+		/*String tableName = "testHiveDriverTable";
 		stmt.executeQuery("drop table " + tableName);
-		ResultSet res = stmt.executeQuery("create table " + tableName
+		res = stmt.executeQuery("create table " + tableName
 				+ " (key int, value string) row format delimited fields terminated by ','");
 		// show tables
 		String sql = "show tables '" + tableName + "'";
 		System.out.println("Running: " + sql);
 		res = stmt.executeQuery(sql);
-		if (res.next()) {
+		if (res.next()) { 
 			System.out.println(res.getString(1));
 		}
 		// describe table
@@ -58,7 +81,7 @@ public class HiveJdbcClientTest {
 
 		// regular hive query
 		sql = "select count(1) from " + tableName;
-		System.out.println("Running: " + sql);
+		System.out.println("Running: " + sql);*/
 		//too slow
 //		res = stmt.executeQuery(sql);
 //		while (res.next()) {

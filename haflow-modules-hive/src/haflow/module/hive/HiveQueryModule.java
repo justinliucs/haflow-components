@@ -11,7 +11,7 @@ import haflow.module.ModuleType;
 import java.util.Map;
 
 @Module(id = "add611a8-aa63-8911-ca46-aaffa0e0bd2f", name = "Hive_Query", category = "DataSource", type = ModuleType.HIVE, configurations = {
-		@ModuleConfiguration(key = "sql", displayName = "Sql Command", pattern = "^(.*)$", type = ModuleConfigurationType.PLAIN_TEXT),
+		@ModuleConfiguration(key = "sql", displayName = "Sql Command", pattern = "^(.*)$", type = ModuleConfigurationType.TEXT_AREA),
 		/*@ModuleConfiguration(key = "outpath", displayName = "Output Directory", pattern = "^(.*)$", type = ModuleConfigurationType.PLAIN_TEXT),*/ }, 
 		inputs = { /*@ModuleEndpoint(name = "from", minNumber = 1, maxNumber = 1, dataType = DataType.PlainText)*/ }, 
 		outputs = {@ModuleEndpoint(name="outpath",minNumber=1,maxNumber=1,dataType=DataType.ALL)

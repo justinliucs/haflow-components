@@ -44,9 +44,9 @@ public class HiveJdbcQueryClient {
 		}
 		Connection con = DriverManager.getConnection(uri, "", "");
 		Statement stmt = con.createStatement();		
-		
-		System.out.println(sql);
-		ResultSet res = stmt.executeQuery(sql);
+		//convert xml sql to formatted sql style
+		String newSql=XmlFilter.decodeXml(sql);
+		ResultSet res = stmt.executeQuery(newSql);
 		ResultSetMetaData resultSetMetaData = res.getMetaData();
 		int columnCount = resultSetMetaData.getColumnCount();
 		StringBuilder sb = new StringBuilder();
